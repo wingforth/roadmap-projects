@@ -1,0 +1,10 @@
+[project]
+name = "github-activity"
+version = "0.1.0"
+description = "A simple and extensible command-line interface (CLI) for interacting with the GitHub REST API."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
+]
