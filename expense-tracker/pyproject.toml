@@ -1,0 +1,12 @@
+[project]
+name = "expense-tracker"
+version = "0.1.0"
+description = "A simple expense tracker application to manage finances."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+]
