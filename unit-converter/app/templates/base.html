@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Unit Converter</a>
+            <ul class="nav-links">
+                <li><a href="/length">Length</a></li>
+                <li><a href="/weight">Weight</a></li>
+                <li><a href="/temperature">Temperature</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <p>&copy; 2025 Unit Converter</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{% block title %}Length Converter{% endblock %}</h2>
+<form method="post" class="convert-form">
+    <div class="form-row">
+        <input type="number" step="any" name="value" placeholder="Enter value" required
+            value="{{ request.form.get('value', '') }}">
+        <select name="from">
+            {% for key, unit in units.items() %}
+            <option value="{{ key }}" {% if from_unit==key %}selected{% endif %}>{{ unit.name }} ({{ key }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-row">
+        <span class="to-label">to</span>
+        <select name="to">
+            {% for key, unit in units.items() %}
+            <option value="{{ key }}" {% if to_unit==key %}selected{% endif %}>{{ unit.name }} ({{ key }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Convert</button>
+</form>
+{% if error %}
+<div class="error-box">{{ error }}</div>
+{% endif %}
+{% if result is not none %}
+<div class="result-box">
+    <p class="result-label">Result:</p>
+    <p class="result-value">{{ request.form['value'] }} {{ from_unit }} = <em>{{ result }}</em> {{ to_unit }}</p>
+</div>
+{% endif %}
+{% endblock %}
