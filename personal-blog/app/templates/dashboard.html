@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Personal Blog{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="card">
+        <div class="row-flex">
+            <h2>Post Management</h2>
+            <a class="btn" href="{{ url_for('admin.new') }}">+ New Post</a>
+        </div>
+        <hr>
+        <ol class="article-list">
+            {% for post in posts %}
+            <li class="row-flex">
+                <span class="article-title">{{ post.title }}</span>
+                <span>
+                    <a class="btn" href="{{ url_for('admin.preview', post_id=post.id) }}">Preview</a>
+                    <a class="btn" href="{{ url_for('admin.edit', post_id=post.id) }}">Edit</a>
+                    <a class="btn" href="{{ url_for('admin.delete', post_id=post.id) }}"
+                        onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                </span>
+            </li>
+            {% else %}
+            <li>No posts available.</li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock %}

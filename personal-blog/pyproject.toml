@@ -1,0 +1,10 @@
+[project]
+name = "personal-blog"
+version = "0.1.0"
+description = "A personal blog to write and publish articles on various topics."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.1",
+    "flask-sqlalchemy>=3.1.1",
+]

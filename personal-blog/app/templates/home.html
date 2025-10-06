@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Personal Blog{% endblock %}
+
+{% block content %}
+    <h2>Published Posts</h2>
+    <hr>
+    <ul class="article-list">
+    {% for post in posts %}
+        <li>
+            <div class="row-flex">
+                <a class="article-link" href="{{ url_for('guest.article', post_id=post.id) }}">{{ post.title }}</a>
+                <span class="article-meta">{{ post.pub_date.strftime('%Y-%m-%d') }}</span>
+            </div>
+        </li>
+    {% else %}
+        <li>No posts available.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

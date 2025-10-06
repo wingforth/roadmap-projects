@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Personal Blog{% endblock %}
+
+{% block content %}
+<div class="login">
+    <h2>Login</h2>
+    <form class="login-form" action="{{ url_for('admin.login') }}" method="post" autocomplete="off">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required autofocus>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
