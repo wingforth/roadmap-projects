@@ -1,0 +1,15 @@
+[project]
+name = "blogging-platform-api"
+version = "0.1.0"
+description = "A simple RESTful API with basic CRUD operations for a personal blogging platform. CRUD stands for Create, Read, Update, and Delete."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1.2",
+    "flask-sqlalchemy>=3.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+]
