@@ -13,10 +13,10 @@
         <h1 class="header-title">Personal Blog</h1>
         <nav class="header-nav">
             <a href="{{ url_for('guest.home') }}">Home</a>
-            {% if session.get('username') %}
+            {% if session.get('user') %}
             <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
             <div class="nav-user">
-                <span class="nav-username">{{ session['username'] }}</span>
+                <span class="nav-username">{{ session['user'] }}</span>
                 <div class="nav-dropdown">
                     <a href="{{ url_for('admin.logout') }}">Logout</a>
                 </div>

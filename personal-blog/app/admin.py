@@ -5,7 +5,7 @@ from flask import Blueprint, url_for, render_template, flash, redirect, request,
 from sqlalchemy import select
 from werkzeug.security import check_password_hash
 
-from .models import db, Post, User
+from app.models import db, Post, User
 
 admin_bp = Blueprint("admin", __name__)
 
@@ -13,7 +13,7 @@ admin_bp = Blueprint("admin", __name__)
 def login_required(view):
     @wraps(view)
     def wrapped(*args, **kwargs):
-        if "username" in session:
+        if "user" in session:
             return view(*args, **kwargs)
         return redirect(url_for("admin.login"))
 
@@ -32,7 +32,8 @@ def login():
         elif not check_password_hash(user.password_hash, password):
             error = "Incorrect password."
         else:
-            session["username"] = user.username
+            session["user"] = user.username
+            session["user_id"] = user.id
             return redirect(url_for("admin.dashboard"))
         flash(error)
     return render_template("login.html")
@@ -40,14 +41,15 @@ def login():
 
 @admin_bp.route("/logout")
 def logout():
-    session.pop("username", None)
+    session.pop("user", None)
+    session.pop("user_id", None)
     return redirect(url_for("guest.home"))
 
 
 @admin_bp.route("/admin")
 @login_required
 def dashboard():
-    posts = db.session.scalars(select(Post).where(Post.author == session["username"]))
+    posts = db.session.scalars(select(Post).join(Post.author).where(User.username == session["user"]))
     return render_template("dashboard.html", posts=posts)
 
 
@@ -57,9 +59,9 @@ def new():
     if request.method == "POST":
         title = request.form.get("title")
         content = request.form.get("content")
-        author = session["username"]
+        author_id = session["user_id"]
         pub_date = datetime.strptime(request.form.get("pub_date"), "%Y-%m-%d").date()
-        post = Post(title=title, content=content, author=author, pub_date=pub_date)
+        post = Post(title=title, content=content, pub_date=pub_date, author_id=author_id)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for("admin.dashboard"))

@@ -3,7 +3,7 @@ from datetime import date
 from flask import Blueprint, render_template
 from sqlalchemy import select
 
-from .models import db, Post
+from app.models import db, Post
 
 guest_bp = Blueprint("guest", __name__)
 
