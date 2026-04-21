@@ -1,6 +1,9 @@
 import os
 import json
+
 from flask import Flask
+
+from app.config import DefaultConfig
 from app.guest import guest_bp
 from app.admin import admin_bp
 from app.models import db
@@ -14,7 +17,7 @@ def create_app():
     except OSError:
         pass
 
-    app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///blog.db")
+    app.config.from_object(DefaultConfig)
     app.config.from_file("config.json", load=json.load, silent=True)
     app.register_blueprint(guest_bp)
     app.register_blueprint(admin_bp)
