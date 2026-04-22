@@ -52,17 +52,13 @@ def set_logger(app: Flask) -> None:
 
 
 def create_app() -> Flask:
+    load_dotenv()
     app = Flask(__name__, instance_relative_config=True)
 
     try:
         os.makedirs(app.instance_path, exist_ok=True)
     except OSError:
         pass
-
-    try:
-        load_dotenv(os.path.join(app.instance_path, ".env"))
-    except FileNotFoundError:
-        load_dotenv()
 
     app.config.from_object(config.Config())
     app.config.from_pyfile("config.py", silent=True)

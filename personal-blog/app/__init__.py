@@ -2,6 +2,7 @@ import os
 import json
 
 from flask import Flask
+from dotenv import load_dotenv
 
 from app.config import DefaultConfig
 from app.guest import guest_bp
@@ -11,6 +12,7 @@ from app.cli import init_db, create_db, delete_db, add_user, list_user, delete_u
 
 
 def create_app():
+    load_dotenv()
     app = Flask(__name__, instance_relative_config=True)
     try:
         os.makedirs(app.instance_path, exist_ok=True)
@@ -24,7 +26,6 @@ def create_app():
     app.cli.add_command(init_db)
     app.cli.add_command(create_db)
     app.cli.add_command(delete_db)
-    app.cli.add_command(init_db)
     app.cli.add_command(add_user)
     app.cli.add_command(list_user)
     app.cli.add_command(delete_user)
