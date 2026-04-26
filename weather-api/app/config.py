@@ -8,6 +8,10 @@ overridden by instance configuration or environment variables.
 
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class Config:
     """Application configuration defaults.
@@ -22,6 +26,7 @@ class Config:
         RATELIMIT_DEFAULT (str): Flask-Limiter default rate limit string.
         RATELIMIT_STORAGE_URI (str): Storage backend for limiter.
     """
+
     SECRET_KEY = os.getenv("SECRET_KEY")
     WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
     CACHE_EXPIRE_TIME = 12 * 60 * 60  # 12 hours

@@ -1,11 +1,9 @@
 """Application package for the blogging-platform-api."""
 
 from flask import Flask
-from dotenv import load_dotenv
 
 from app.config import DefaultConfig
 
-load_dotenv()
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(DefaultConfig)
 try:

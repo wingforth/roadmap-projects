@@ -6,10 +6,13 @@ an instance config file or environment variables.
 
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class DefaultConfig:
-    """Default configuration values used by the Flask app.
-    """
+    """Default configuration values used by the Flask app."""
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = "sqlite:///blog.db"
